@@ -5,8 +5,7 @@ var score
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	new_game()
-
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -15,11 +14,14 @@ func _process(_delta: float) -> void:
 func game_over() -> void:
 	$ScoreTimer.stop()
 	$MobTimer.stop()
+	$HUD.show_game_over()
 
 func new_game() -> void:
 	score = 0
 	$Player.start($StartPosition.position)
 	$MobTimer.start()
+	$HUD.update_score(score)
+	$HUD.show_message('Jajá começa')
 
 func _on_mob_timer_timeout():
 	var mob = mob_scene.instantiate()
@@ -56,13 +58,14 @@ func _on_mob_timer_timeout():
 	var velocity = Vector2(randf_range(150, 250), 0)
 	#pega a propriedade de velocidade linear do mob e associa ela a velocidade que a gente criou,
 	#além disso, ele rotaciona esse vetor pra direção aleatória que a gente setou antes
-	mob.linear_velocity = velocity.rotaded(direction)
+	mob.linear_velocity = velocity.rotated(direction)
 
 	add_child(mob)
 	#spawna o mob na cena principal
 
 func _on_score_timer_timeout() -> void:
 	score += 1
+	$HUD.update_score(score)
 
 
 func _on_start_timer_timeout() -> void:
