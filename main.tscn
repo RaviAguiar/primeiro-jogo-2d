@@ -28,9 +28,12 @@ one_shot = true
 [node name="StartPosition" type="Marker2D" parent="." unique_id=53021099]
 position = Vector2(240, 450)
 
-[node name="Path2D" type="Path2D" parent="." unique_id=522336181]
+[node name="MobPath" type="Path2D" parent="." unique_id=522336181]
 curve = SubResource("Curve2D_7mycd")
 
-[node name="MobSpawnLocation" type="PathFollow2D" parent="Path2D" unique_id=1366157472]
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath" unique_id=1366157472]
 
 [connection signal="hit" from="Player" to="." method="game_over"]
+[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

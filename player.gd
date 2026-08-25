@@ -8,7 +8,7 @@ func _ready() -> void:
 	#função de pegar e setar o tamanho da tela, vai ser útil
 	#pro personagem não sair da tela usando a função clamp()
 	screen_size = get_viewport_rect().size
-	#hide()
+	hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -61,4 +61,4 @@ func _on_body_entered(body: Node2D) -> void:
 func start(pos):
 	position = pos
 	show()
-	$CollisionShape2D.diabled = false
+	$CollisionShape2D.disabled = false
