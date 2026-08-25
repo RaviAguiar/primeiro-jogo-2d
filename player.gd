@@ -1,4 +1,5 @@
 extends Area2D
+signal hit
 
 @export var speed = 400
 var screen_size
@@ -7,7 +8,7 @@ func _ready() -> void:
 	#função de pegar e setar o tamanho da tela, vai ser útil
 	#pro personagem não sair da tela usando a função clamp()
 	screen_size = get_viewport_rect().size
-	hide()
+	#hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -42,10 +43,22 @@ func _process(delta: float) -> void:
 	#nesse caso aqui a gente tá usando ela pro player não passar pra fora da janela do jogo
 	position = position.clamp(Vector2.ZERO, screen_size)
 	
-	if velocity.x != 0:
-		$AnimatedSprite2D.animation = 'walk'
-		$AnimatedSprite2D.flip_v = false
-		$AnimatedSprite2D.flip_h = velocity.x > 0
-	elif velocity.y != 0:
+	if velocity.y != 0:
 		$AnimatedSprite2D.animation = 'up'
 		$AnimatedSprite2D.flip_v = velocity.y > 0
+	elif velocity.x != 0:
+		$AnimatedSprite2D.animation = 'walk'
+		$AnimatedSprite2D.flip_v = false
+		$AnimatedSprite2D.flip_h = velocity.x < 0
+
+
+
+func _on_body_entered(body: Node2D) -> void:
+	hide()
+	hit.emit()
+	$CollisionShape2D.set_deffered('disabled', true)
+	
+func start(pos):
+	position = pos
+	show()
+	$CollisionShape2D.diabled = false
