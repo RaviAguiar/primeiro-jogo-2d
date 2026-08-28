@@ -3,12 +3,9 @@ extends Node
 @export var mob_scene: PackedScene
 var score
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	new_game()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
 
@@ -19,7 +16,7 @@ func game_over() -> void:
 func new_game() -> void:
 	score = 0
 	$Player.start($StartPosition.position)
-	$MobTimer.start()
+	$StartTimer.start()
 
 func _on_mob_timer_timeout():
 	var mob = mob_scene.instantiate()
@@ -56,14 +53,13 @@ func _on_mob_timer_timeout():
 	var velocity = Vector2(randf_range(150, 250), 0)
 	#pega a propriedade de velocidade linear do mob e associa ela a velocidade que a gente criou,
 	#além disso, ele rotaciona esse vetor pra direção aleatória que a gente setou antes
-	mob.linear_velocity = velocity.rotaded(direction)
+	mob.linear_velocity = velocity.rotated(direction)
 
 	add_child(mob)
 	#spawna o mob na cena principal
 
 func _on_score_timer_timeout() -> void:
 	score += 1
-
 
 func _on_start_timer_timeout() -> void:
 	$MobTimer.start()
