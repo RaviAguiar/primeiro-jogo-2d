@@ -13,7 +13,6 @@ config_version=5
 config/name="Primeiro jogo 2D"
 run/main_scene="uid://co0dgfag4s7t4"
 config/features=PackedStringArray("4.7", "Forward Plus")
-config/icon="res://icon.svg"
 
 [display]
 
