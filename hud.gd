@@ -17,7 +17,7 @@ func show_message(text):
 	$MessageTimer.start()
 	
 func show_game_over():
-	show_message("Acabou pra tu")
+	show_message("Acabou\npra tu")
 	# Wait until the MessageTimer has counted down.
 	await $MessageTimer.timeout
 
