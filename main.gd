@@ -3,7 +3,7 @@ extends Node
 var score
 
 func _ready() -> void:
-	new_game()
+	pass
 
 func _process(_delta: float) -> void:
 	pass

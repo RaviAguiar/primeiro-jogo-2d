@@ -67,6 +67,7 @@ stream = SubResource("AudioStreamOggVorbis_7mycd")
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="." unique_id=349669843]
 stream = ExtResource("5_lquwl")
+volume_db = 10.0
 
 [connection signal="hit" from="Player" to="." method="game_over"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
